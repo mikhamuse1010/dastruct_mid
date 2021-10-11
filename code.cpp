@@ -46,13 +46,14 @@ double Operators::Division(double a, double b) {
 
 // Main function
 int main() {
-    const int MAX_INPUT = 100;
+    //const int MAX_INPUT = 100;
     Operators op;
-    int i = MAX_INPUT;
+    string eq;
+    //int i = MAX_INPUT;
 
-    char input[MAX_INPUT];
+    //char input[MAX_INPUT];
 
-    cin.getline(input, MAX_INPUT);
+    getline(cin,eq);
 
     // ini gw bingung mau digimanain lagi 
     // how to mengolah input-nya. stuck masihan
