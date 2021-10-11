@@ -3,7 +3,16 @@
 #include <math.h> // For Extended class
 using namespace std;
 
-queue <string> history;
+class Calculator
+{
+    public:
+        void addhistory();
+        void clearhistory();
+        void deletelast();
+        void showhistory();
+    private:
+        queue <string> history;
+};
 
 // For extended operators other than + - * /
 class Extended {
@@ -48,13 +57,22 @@ double Operators::Division(double a, double b) {
 int main() {
     //const int MAX_INPUT = 100;
     Operators op;
+    Extended ex;
+    Calculator calc;
     string eq;
+    double ans;
+    int temp'
     //int i = MAX_INPUT;
 
     //char input[MAX_INPUT];
 
     getline(cin,eq);
-
+    temp=eq.find("*");
+    if (temp != string::npos)
+    {
+        
+    }
+    
     // ini gw bingung mau digimanain lagi 
     // how to mengolah input-nya. stuck masihan
     // makanya gw templating class nya dulu
