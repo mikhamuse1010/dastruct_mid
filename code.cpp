@@ -38,7 +38,7 @@ int Operators::Multiplication(int a, int b) {
     return (a * b);
 }
 
-double Division(int a, int b) {
+double Operators::Division(int a, int b) {
     return double(a / b);
 }
 
