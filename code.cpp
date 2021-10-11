@@ -3,6 +3,8 @@
 #include <math.h> // For Extended class
 using namespace std;
 
+queue <string> history;
+
 // For extended operators other than + - * /
 class Extended {
     public:
@@ -20,25 +22,25 @@ class Extended {
 // For basic operators
 class Operators {
     public:
-        int Addition(int a, int b);
-        int Substraction(int a, int b);
-        int Multiplication(int a, int b);
-        double Division(int a, int b);
+        double Addition(double a, double b);
+        double Substraction(double a, double b);
+        double Multiplication(double a, double b);
+        double Division(double a, double b);
 };
 
-int Operators::Addition(int a, int b) {
+int Operators::Addition(double a, double b) {
     return (a + b);
 }
 
-int Operators::Substraction(int a, int b) {
+int Operators::Substraction(double a, double b) {
     return (a - b);
 }
 
-int Operators::Multiplication(int a, int b) {
+int Operators::Multiplication(double a, double b) {
     return (a * b);
 }
 
-double Operators::Division(int a, int b) {
+double Operators::Division(double a, double b) {
     return double(a / b);
 }
 
