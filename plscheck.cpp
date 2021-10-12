@@ -283,6 +283,7 @@ while (userInput != sentinel)	{
 	else if(userInput=="H")
 	{
 		hh.showhis();
+        continue;
 	}
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
