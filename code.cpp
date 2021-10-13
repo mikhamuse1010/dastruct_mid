@@ -18,6 +18,10 @@ class history
 		}
 		void showhis()
 		{
+			if(histo.empty())
+			{
+				cout<<"history is empty"<<endl;
+			}
 			while(!histo.empty())
 			{
 				cout<<histo.front()<<endl;
@@ -37,6 +41,13 @@ class history
 			{
 				histo.pop();
 			}
+			cout<<"History has been cleared!!"<<endl;
+			return;
+		}
+		void delone()
+		{
+			cout<<histo.front()<<" has been deleted!!"<<endl;
+			histo.pop();
 			return;
 		}
 		
@@ -271,9 +282,13 @@ public:
 int main()
 {
 	
-	history hh;
+history hh;
 string userInput, sentinel = "0";
-cout << "Enter 0 to exit the program.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+cout << "Enter 0 to exit the program"<<endl;
+cout<<"Enter H to view history"<<endl;
+cout<<"Enter D to delete latest history"<<endl;
+cout<<"Enter C to clear history"<<endl;
+cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 
 while (userInput != sentinel)	{
 	cout << "Enter an expression: ";
@@ -284,6 +299,16 @@ while (userInput != sentinel)	{
 	{
 		hh.showhis();
         continue;
+	}
+	else if(userInput=="C")
+	{
+		hh.clearhis();
+		continue;
+	}
+	else if(userInput=="D")
+	{
+		hh.delone();
+		continue;
 	}
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
