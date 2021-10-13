@@ -180,8 +180,10 @@ public:
 	int precedence(char character)
 	{
 		if (character == '^')
-			return 3;
+			return 4;
 		else if (character == '*' || character == '/')
+			return 3;
+		else if (character == 's' || character == 'c' || character == 't')
 			return 2;
 		else if (character == '+' || character == '-')
 			return 1;
@@ -200,6 +202,15 @@ public:
 		case '*': return valueOne * valueTwo; break;
 		case '/': return valueOne / valueTwo; break;
 		case '^': return (int)pow(valueOne, valueTwo); break;
+		}
+	}
+	
+	double trigonometry(char character, int value) 
+	{
+		switch(character) {
+			case 's': return (sin(value)); break;
+            		case 'c': return (cos(value)); break;
+            		case 't': return (tan(value)); break;
 		}
 	}
 
