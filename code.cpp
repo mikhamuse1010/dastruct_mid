@@ -240,7 +240,7 @@ public:
 
 			else if (isOperator(infix[i]) == true)
 			{
-				if (operators.empty() == true || precedence(infix[i]) >= precedence(operators.top()))
+				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
 				}
