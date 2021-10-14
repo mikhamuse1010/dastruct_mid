@@ -7,7 +7,7 @@ class history
 		queue <string> histo;
 		queue <string> temp;
 	public:
-		void addtohis(string s, int ans)
+		void addtohis(string s, double ans)
 		{
 			string addd;
 			string n;
@@ -18,6 +18,10 @@ class history
 		}
 		void showhis()
 		{
+			if(histo.empty())
+			{
+				cout<<"history is empty"<<endl;
+			}
 			while(!histo.empty())
 			{
 				cout<<histo.front()<<endl;
@@ -37,6 +41,13 @@ class history
 			{
 				histo.pop();
 			}
+			cout<<"History has been cleared!!"<<endl;
+			return;
+		}
+		void delone()
+		{
+			cout<<histo.front()<<" has been deleted!!"<<endl;
+			histo.pop();
 			return;
 		}
 		
@@ -54,15 +65,27 @@ private:
 public:
 	order() { head = NULL; }
 
-	void push(DataType element)
+	void push(DataType element, bool output = false)
 	{
+    // if (output){
+      cout << "element being pushed: " <<element << endl;
+    // }
 		struct Node* newNode;
 		newNode = new Node();
 		newNode->data = element;
 		newNode->next = head;
 		head = newNode;
 	}
-
+  void loop(){
+    struct Node* temp;
+    temp = head;
+    cout << "looping: ";
+    while (temp != NULL){
+      cout << temp->data << ' ';
+      temp = temp->next;
+    }
+    cout << endl;
+  }
 	DataType pop()
 	{
 		struct Node* temp;
@@ -92,8 +115,8 @@ class Calculator
 {
 private:
 	string infix;
-	order <char> operands;
-	order <int> operators;
+	order <double> operands;
+	order <char> operators;
 
 public: 
 	Calculator() { string infix = ""; }
@@ -124,21 +147,21 @@ public:
 		{
 			cout<<"Error: Unmatched Parenthesis (Brackets)"<<endl<<endl;;
 		}
-		try 
-		{
-			for (size_t i = 0; i < infix.length(); i++)
-			{
-				switch (infix[i])
-				{
-				case '.': legal = false; throw 1; break;
-				default: break;
-				}
-			}
-		}
-		catch (...)
-		{
-			cout << "Error: Operands must be integers!"<<endl<<endl;
-		}
+		// try 
+		// {
+		// 	for (size_t i = 0; i < infix.length(); i++)
+		// 	{
+		// 		switch (infix[i])
+		// 		{
+		// 		case '.': legal = false; throw 1; break;
+		// 		default: break;
+		// 		}
+		// 	}
+		// }
+		// catch (...)
+		// {
+		// 	cout << "Error: Operands must be integers!"<<endl<<endl;
+		// }
 		return legal;
 	}
 
@@ -152,10 +175,12 @@ public:
 
 	bool isOperator(char op)
 	{
-		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^')
-			return true;
-		else
+		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^'){
+      return true;
+    }
+		else{
 			return false;
+    }
 	}
 
 	bool isSpace(char character)
@@ -169,8 +194,10 @@ public:
 	int precedence(char character)
 	{
 		if (character == '^')
-			return 3;
+			return 4;
 		else if (character == '*' || character == '/')
+			return 3;
+		else if (character == 's' || character == 'c' || character == 't')
 			return 2;
 		else if (character == '+' || character == '-')
 			return 1;
@@ -180,30 +207,60 @@ public:
 			return -1;
 	}
 
-	int operate(int valueOne, int valueTwo, char op)
+	double operate(double valueOne, double valueTwo, char op)
 	{
+  
+
 		switch (op) 
 		{
 		case '+': return valueOne + valueTwo; break;
 		case '-': return valueOne - valueTwo; break;
 		case '*': return valueOne * valueTwo; break;
 		case '/': return valueOne / valueTwo; break;
-		case '^': return (int)pow(valueOne, valueTwo); break;
+		case '^': return (double)pow(valueOne, valueTwo); break;
+		}
+	}
+	
+	double trigonometry(char character, double value) 
+	{
+		switch(character) {
+			case 's': return (sin(value)); break;
+      case 'c': return (cos(value)); break;
+      case 't': return (tan(value)); break;
 		}
 	}
 
-	int eval()
+	double eval()
 	{
-		int finalAnswer;
+		double finalAnswer;
 		for (size_t i = 0; i < infix.length(); i++)
 		{
 			if (isOperand(infix[i]) == true)
 			{
-				int currentNumber = 0;
-				while (i < infix.length() && isOperand(infix[i]))
+				double currentNumber = 0;
+				while (i < infix.length() && ( isOperand(infix[i]) || infix[i] == '.'))
 				{
-					currentNumber = 10 * currentNumber + (int)(infix[i] - '0');
-					++i;
+          if (infix[i] == '.'){
+            int counter = 0;
+            int dec = 0;
+            i++; 
+            for(; i < infix.length(); i++){
+              if (isOperand(infix[i])){
+                dec = 10 * dec + (int)(infix[i] - '0');
+                counter++;
+              }
+              else break;
+            }
+            double calculatedDec= (double)dec / (double)(pow(10, counter));
+            cout << currentNumber << endl;
+            cout << fixed << setprecision(5) << calculatedDec << endl;
+            currentNumber += calculatedDec;
+            
+          }
+          else {
+					  currentNumber = 10 * currentNumber + (double)(infix[i] - '0');
+					  ++i;
+          }
 				}
 				operands.push(currentNumber);
 				--i;
@@ -216,8 +273,8 @@ public:
 			{
 				while (operators.top() != '(')
 				{
-					int valueOne = operands.pop();
-					int valueTwo = operands.pop();
+					double valueOne = operands.pop();
+					double valueTwo = operands.pop();
 					char op = operators.pop();
 					operands.push(operate(valueTwo,valueOne,op));
 				}
@@ -229,29 +286,36 @@ public:
 
 			else if (isOperator(infix[i]) == true)
 			{
-				if (operators.empty() == true || precedence(infix[i]) >= precedence(operators.top()))
+				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
 				}
 				else
 				{
-					int valueTwo = operands.pop();
-					int valueOne = operands.pop();
+					double valueTwo = operands.pop();
+					double valueOne = operands.pop();
 					char op = operators.pop();
-					operands.push(operate(valueOne, valueTwo, op));
+          double operatedValue = operate(valueOne, valueTwo, op);
+          cout << valueOne << " " << op << " " << valueTwo << " = " << operatedValue << endl;
+					operands.push(operatedValue);
 					operators.push(infix[i]);
 				}
 			}
 		}
+    //4 * 5 + 6 ^ 3 
 		finalAnswer = operands.top();
 
-		while (operators.empty() != true)
+		while (!operators.empty())
 		{
-			int valueTwo = operands.pop();
-			int valueOne = operands.pop();
+      operands.loop();
+			double valueTwo = operands.pop();
+			double valueOne = operands.pop();
 			char op = operators.pop();
-			operands.push(operate(valueOne, valueTwo, op));
-			finalAnswer = operate(valueOne, valueTwo, op);
+
+      double operateValue = operate(valueOne, valueTwo, op);
+
+			operands.push(operateValue, true);
+			finalAnswer = operateValue;
 		}
 
 		return finalAnswer;
@@ -271,9 +335,13 @@ public:
 int main()
 {
 	
-	history hh;
+history hh;
 string userInput, sentinel = "0";
-cout << "Enter 0 to exit the program.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+cout << "Enter 0 to exit the program"<<endl;
+cout<<"Enter H to view history"<<endl;
+cout<<"Enter D to delete latest history"<<endl;
+cout<<"Enter C to clear history"<<endl;
+cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 
 while (userInput != sentinel)	{
 	cout << "Enter an expression: ";
@@ -285,13 +353,25 @@ while (userInput != sentinel)	{
 		hh.showhis();
         continue;
 	}
+	else if(userInput=="C")
+	{
+		hh.clearhis();
+		continue;
+	}
+	else if(userInput=="D")
+	{
+		hh.delone();
+		continue;
+	}
+  cout << userInput << endl;
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
 		continue;
 	else
 	{
-		cout << "\nResult: " << userExpression.eval() << "\n\n";
-		hh.addtohis(userInput, userExpression.eval());
+    double finalValue = userExpression.eval();
+		cout << "\nResult: " <<  finalValue << "\n\n";
+		hh.addtohis(userInput, finalValue);
 	}
 }
 

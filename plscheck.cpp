@@ -1,4 +1,4 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 class history
@@ -6,16 +6,18 @@ class history
 	private:
 		queue <string> histo;
 		queue <string> temp;
+		
 	public:
 		void addtohis(string s, int ans)
 		{
 			string addd;
 			string n;
-			n=to_string(ans);
-			addd=s+"= "+n;
+			n = to_str(ans);
+			addd=s + "= "+ n;
 			histo.push(addd);
 			return;
 		}
+		
 		void showhis()
 		{
 			while(!histo.empty())
@@ -31,6 +33,7 @@ class history
 			}
 			return;
 		}
+		
 		void clearhis()
 		{
 			while(!histo.empty())
@@ -39,53 +42,53 @@ class history
 			}
 			return;
 		}
-		
 };
 
 template <typename DataType>
 class order {
-private:
-	struct Node
-	{
-		DataType data;
-		Node* next;
-	};
-	Node* head;
-public:
-	order() { head = NULL; }
+	private:
+		struct Node
+		{
+			DataType data;
+			Node* next;
+		};
+		Node* head;
+	public:
+		order() { 
+			head = NULL; 
+		}
+		void push(DataType element)
+		{
+			struct Node* newNode;
+			newNode = new Node();
+			newNode->data = element;
+			newNode->next = head;
+			head = newNode;
+		}
 
-	void push(DataType element)
-	{
-		struct Node* newNode;
-		newNode = new Node();
-		newNode->data = element;
-		newNode->next = head;
-		head = newNode;
-	}
+		DataType pop()
+		{
+			struct Node* temp;
+			temp = head;
+			DataType poppedValue = head->data;
+			head = head->next;
+			temp->next = NULL;
+			free(temp);
+			return poppedValue;
+		}
 
-	DataType pop()
-	{
-		struct Node* temp;
-		temp = head;
-		DataType poppedValue = head->data;
-		head = head->next;
-		temp->next = NULL;
-		free(temp);
-		return poppedValue;
-	}
+		DataType top()
+		{
+			return head->data;
+		}
 
-	DataType top()
-	{
-		return head->data;
-	}
-
-	bool empty()
-	{
-		if (head == NULL)
-			return true;
-		else 
-			return false;
-	}
+		bool empty()
+		{
+			if (head == NULL)
+				return true;
+			else 
+				return false;
+		}
 };
 
 class Calculator
@@ -270,31 +273,28 @@ public:
 
 int main()
 {
-	
 	history hh;
-string userInput, sentinel = "0";
-cout << "Enter 0 to exit the program.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
-
-while (userInput != sentinel)	{
-	cout << "Enter an expression: ";
-	getline(cin, userInput);
-	if (userInput == "0")
-		break;
-	else if(userInput=="H")
-	{
-		hh.showhis();
-        continue;
-	}
-	Calculator userExpression(userInput);
-	if (userExpression.isLegal(userInput) == false)
-		continue;
-	else
-	{
-		cout << "\nResult: " << userExpression.eval() << "\n\n";
-		hh.addtohis(userInput, userExpression.eval());
-	}
-}
-
+	string userInput, sentinel = "0";
+	cout << "Enter 0 to exit the program.\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+	while (userInput != sentinel)	{
+		cout << "Enter an expression: ";
+		getline(cin, userInput);
+		if (userInput == "0")
+			break;
+		else if(userInput=="H")
+		{
+			hh.showhis();
+        	continue;
+		}
+		Calculator userExpression(userInput);
+		if (userExpression.isLegal(userInput) == false)
+			continue;
+		else
+		{
+			cout << "\nResult: " << userExpression.eval() << "\n\n";
+			hh.addtohis(userInput, userExpression.eval());
+		}
+	}	
 	system("pause");
 
 	return 0;
