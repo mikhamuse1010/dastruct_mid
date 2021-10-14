@@ -229,6 +229,15 @@ public:
       case 't': return (tan(value)); break;
 		}
 	}
+	
+	double trigonometry(char character, int value) 
+	{
+		switch(character) {
+			case 's': return (sin(value)); break;
+            		case 'c': return (cos(value)); break;
+            		case 't': return (tan(value)); break;
+		}
+	}
 
 	double eval()
 	{
@@ -363,7 +372,10 @@ while (userInput != sentinel)	{
 		hh.delone();
 		continue;
 	}
+<<<<<<< HEAD
   cout << userInput << endl;
+=======
+>>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
 		continue;
