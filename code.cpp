@@ -311,7 +311,6 @@ public:
 							                val=val*M_PI;
 						                }   
 					  	            }
-					  	        }
 				double hasilTrig = trigonometry(opTrig, val);
 				operands.push(hasilTrig);
 			}
@@ -324,14 +323,16 @@ public:
 			    double angka = 0;
 				 while ( isOperand(infix[i + 1]) == true)
 					{
-					  angka =  10 * angka + (double)(infix[i + 1] - '0');
-					  i++;
+					 if (infix[i+1] != 'p'
+					     {
+					  	angka =  10 * angka + (double)(infix[i + 1] - '0');
+					  	i++;
+					     }
 					  if (infix[i+1]=='p'&& angka !=0) 
 						                {
 							                angka = angka*M_PI;
 						                }   
 					  	            }
-				 	}
 			    double hasilEx = extended(opEx, angka);
 			    operands.push(hasilEx);
 			}
