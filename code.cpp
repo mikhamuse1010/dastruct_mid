@@ -156,7 +156,7 @@ public:
 
 	bool isOperator(char op)
 	{
-		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^'){
+		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^' || op  == 's' || op == 'c' || op == 't'){
       return true;
     }
 		else{
