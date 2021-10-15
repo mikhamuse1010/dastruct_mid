@@ -346,6 +346,7 @@ public:
 				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
+				}
 				else
 				{
     			    double valueTwo = operands.pop();
