@@ -79,12 +79,12 @@ public:
   void loop(){
     struct Node* temp;
     temp = head;
-    cout << "looping: ";
+    // cout << "looping: ";
     while (temp != NULL){
-      cout << temp->data << ' ';
+      // cout << temp->data << ' ';
       temp = temp->next;
     }
-    cout << endl;
+    // cout << endl;
   }
 	DataType pop()
 	{
@@ -261,8 +261,8 @@ public:
               else break;
             }
             double calculatedDec= (double)dec / (double)(pow(10, counter));
-            cout << currentNumber << endl;
-            cout << fixed << setprecision(5) << calculatedDec << endl;
+            // cout << currentNumber << endl;
+            // cout << fixed << setprecision(5) << calculatedDec << endl;
             currentNumber += calculatedDec;
             
           }
@@ -373,7 +373,7 @@ while (userInput != sentinel)	{
 		continue;
 	}
 <<<<<<< HEAD
-  cout << userInput << endl;
+  // cout << userInput << endl;
 =======
 >>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
 	Calculator userExpression(userInput);
