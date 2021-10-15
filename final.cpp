@@ -301,9 +301,16 @@ public:
 				double val = 0;
 					while ( isOperand(infix[i + 1]) == true)
 					  	        {
+					  	            if (infix[i+1] != 'p')
+					  	            {
 					  	            val =  10 * val + (double)(infix[i + 1] - '0');
+					  	            }
 					  	            i++;
-					  	        }
+					  	            if (infix[i+1]=='p'&& val !=0) 
+						                {
+							                val=val*M_PI;
+						                }   
+					  	            }
 				double hasilTrig = trigonometry(opTrig, val);
 				operands.push(hasilTrig);
 			}
@@ -316,9 +323,16 @@ public:
 			    double angka = 0;
 				 while ( isOperand(infix[i + 1]) == true)
 					{
-					  angka =  10 * angka + (double)(infix[i + 1] - '0');
-					  i++;
-				 	}
+					 if (infix[i+1] != 'p')
+					     {
+					  	angka =  10 * angka + (double)(infix[i + 1] - '0');
+					  	i++;
+					     }
+					  if (infix[i+1]=='p'&& angka !=0) 
+						                {
+							                angka = angka*M_PI;
+						                }   
+					  	            }
 			    double hasilEx = extended(opEx, angka);
 			    operands.push(hasilEx);
 			}
@@ -404,7 +418,7 @@ void printOpening() {
     
     cout << "Enter 0 to exit the program" << endl;
     cout << "Enter H to view history" << endl;
-    cout << "Enter D to delete latest history" << endl;
+    cout << "Enter D to delete first history" << endl;
     cout << "Enter E to Erase all history" << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
