@@ -323,7 +323,7 @@ public:
 			    double angka = 0;
 				 while ( isOperand(infix[i + 1]) == true)
 					{
-					 if (infix[i+1] != 'p'
+					 if (infix[i+1] != 'p')
 					     {
 					  	angka =  10 * angka + (double)(infix[i + 1] - '0');
 					  	i++;
