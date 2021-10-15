@@ -418,7 +418,7 @@ void printOpening() {
     
     cout << "Enter 0 to exit the program" << endl;
     cout << "Enter H to view history" << endl;
-    cout << "Enter D to delete latest history" << endl;
+    cout << "Enter D to delete first history" << endl;
     cout << "Enter E to Erase all history" << endl;
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
