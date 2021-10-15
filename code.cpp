@@ -396,7 +396,7 @@ void printOpening() {
     
     cout << "--Example of sqrt, log, ln-- " << endl;
     cout << "~ 4x means sqrt(4)" << endl;
-    cout << "~ 20y means log(40)" << endl;
+    cout << "~ 20y means log(20)" << endl;
     cout << "~ 8z means ln(8)" << endl << endl;
     
     cout << "Enter 0 to exit the program" << endl;
