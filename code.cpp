@@ -20,7 +20,7 @@ class history
 		{
 			if(histo.empty())
 			{
-				cout<<"history is empty"<<endl;
+				cout<<"history is empty"<<endl ;
 			}
 			while(!histo.empty())
 			{
@@ -33,6 +33,7 @@ class history
 				histo.push(temp.front());
 				temp.pop();
 			}
+			cout << endl;
 			return;
 		}
 		void clearhis()
@@ -41,12 +42,12 @@ class history
 			{
 				histo.pop();
 			}
-			cout<<"History has been cleared!!"<<endl;
+			cout<<"History has been cleared!!"<<endl << endl;
 			return;
 		}
 		void delone()
 		{
-			cout<<histo.front()<<" has been deleted!!"<<endl;
+			cout<<histo.front()<<" has been deleted!!"<<endl << endl;
 			histo.pop();
 			return;
 		}
@@ -67,25 +68,20 @@ public:
 
 	void push(DataType element, bool output = false)
 	{
-        cout << "element being pushed: " <<element << endl;
+    //   cout << "element being pushed: " <<element << endl;
 		struct Node* newNode;
 		newNode = new Node();
 		newNode->data = element;
 		newNode->next = head;
 		head = newNode;
 	}
-	
-    void loop(){
-        struct Node* temp;
-        temp = head;
-        cout << "looping: ";
-        while (temp != NULL){
-          cout << temp->data << ' ';
-          temp = temp->next;
-        }
-        cout << endl;
+  void loop(){
+    struct Node* temp;
+    temp = head;
+    while (temp != NULL){
+      temp = temp->next;
     }
-    
+  }
 	DataType pop()
 	{
 		struct Node* temp;
@@ -147,27 +143,12 @@ public:
 		{
 			cout<<"Error: Unmatched Parenthesis (Brackets)"<<endl<<endl;;
 		}
-		// try 
-		// {
-		// 	for (size_t i = 0; i < infix.length(); i++)
-		// 	{
-		// 		switch (infix[i])
-		// 		{
-		// 		case '.': legal = false; throw 1; break;
-		// 		default: break;
-		// 		}
-		// 	}
-		// }
-		// catch (...)
-		// {
-		// 	cout << "Error: Operands must be integers!"<<endl<<endl;
-		// }
 		return legal;
 	}
 
 	bool isOperand(char number)
 	{
-		if (number >= '0' && number <= '9')
+		if ((number >= '0' && number <= '9')||number=='p')
 			return true;
 		else
 			return false;
@@ -175,11 +156,12 @@ public:
 
 	bool isOperator(char op)
 	{
-	    if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^'){
-            return true;
+		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^' || op  == 's' || op == 'c' || op == 't'){
+      return true;
     }
-		else
+		else{
 			return false;
+    }
 	}
 
 	bool isSpace(char character)
@@ -212,7 +194,7 @@ public:
 			return 4;
 		else if (character == '*' || character == '/')
 			return 3;
-		else if (character == 's' || character == 'c' || character == 't')
+		else if (character == 's' || character == 'c' || character == 't' || character == 'x' || character == 'y' || character == 'z')
 			return 2;
 		else if (character == '+' || character == '-')
 			return 1;
@@ -224,6 +206,8 @@ public:
 
 	double operate(double valueOne, double valueTwo, char op)
 	{
+  
+
 		switch (op) 
 		{
 		case '+': return valueOne + valueTwo; break;
@@ -236,7 +220,7 @@ public:
 	
 	double trigonometry(char character, double value) 
 	{
-        double sinus = sin(value);
+       		double sinus = sin(value);
 	    double cosin = cos(value);
 	    double tangent = tan(value);
 		switch(character) {
@@ -257,41 +241,54 @@ public:
 	        case 'z': return z; break;
 	    }
 	}
-	
+
 	double eval()
 	{
 		double finalAnswer;
 		for (size_t i = 0; i < infix.length(); i++)
 		{
-		    // storing the number
 			if (isOperand(infix[i]) == true)
 			{
-    			double currentNumber = 0;
-    			while (i < infix.length() && (isOperand(infix[i]) || infix[i] == '.'))
-    			{
-    			    // floating number
-                    if (infix[i] == '.'){ 
-                        int counter = 0;
-                        int dec = 0;
-                        i++; 
-                        for(; i < infix.length(); i++){
-                            if (isOperand(infix[i])){
-                                dec = 10 * dec + (int)(infix[i] - '0');
-                                counter++;
-                            }
-                            else break;
-                        }
-                        double calculatedDec= (double)dec / (double)(pow(10, counter));
-                        cout << currentNumber << endl;
-                        cout << fixed << setprecision(5) << calculatedDec << endl;
-                        currentNumber += calculatedDec;
-                    }
-                    // integer
-                    else {
-    					  currentNumber = 10 * currentNumber + (double)(infix[i] - '0');
-    					  ++i;
-                    }
-    			}
+				double currentNumber = 0;
+				while (i < infix.length() && ( isOperand(infix[i]) || infix[i] == '.'))
+				{
+          			if (infix[i] == '.')
+					{
+            			int counter = 0;
+            			int dec = 0;
+            			i++; 
+            			for(; i < infix.length(); i++)
+						{
+              				if (isOperand(infix[i]))
+							{
+                				dec = 10 * dec + (int)(infix[i] - '0');
+                				counter++;
+              				}
+              				else break;
+            			}
+            			double calculatedDec= (double)dec / (double)(pow(10, counter));
+            			// cout << currentNumber << endl;
+            			// cout << fixed << setprecision(5) << calculatedDec << endl;
+            			currentNumber += calculatedDec;
+	
+      	    		}
+        	  		else 
+					{
+						if (infix[i]!='p')
+						{
+							currentNumber = 10 * currentNumber + (double)(infix[i] - '0');
+						}
+						if (infix[i]=='p'&&currentNumber==0) 
+						{
+							currentNumber=M_PI;
+						}
+						else if (infix[i]=='p'&&currentNumber!=0) 
+						{
+							currentNumber=currentNumber*M_PI;
+						}
+						++i;
+          			}
+				}
 				operands.push(currentNumber);
 				--i;
 			}
@@ -300,10 +297,10 @@ public:
 			    if (infix[i] == 's' || infix[i] == 'c' || infix[i] == 't') {
 			        operators.push(infix[i]);
 			    }
-                char opTrig = operators.pop();
-                double angka = operands.pop();
-                double hasilTrig = trigonometry(opTrig, angka);
-                operands.push(hasilTrig);
+				char opTrig = operators.pop();
+				double angka = operands.pop();
+				double hasilTrig = trigonometry(opTrig, angka);
+				operands.push(hasilTrig);
 			}
 			
 			else if(isExtended(infix[i])) {
@@ -315,11 +312,10 @@ public:
 			    double hasilEx = extended(opEx, angka);
 			    operands.push(hasilEx);
 			}
-                
-            // brackets
+
 			else if (infix[i] == '(')
 				operators.push(infix[i]);
-
+			
 			else if (infix[i] == ')')
 			{
 				while (operators.top() != '(')
@@ -334,18 +330,25 @@ public:
 
 			else if (isSpace(infix[i]) == true)
 				continue;
-				
+
 			else if (isOperator(infix[i]) == true)
 			{
 				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
+					if (operators.top() == 's' || operators.top() == 'c' || infix[i] == 't')
+					{
+					char sign = infix[i];
+				    	double val = infix[i+1];
+				    	double trig = trigonometry(sign, val);
+				    	operands.push(trig);
+					}
 				}
 				else
 				{
     			    double valueTwo = operands.pop();
     				double valueOne = operands.pop();
-    				char op = operators.pop();
+					char op = operators.pop();
                     double operatedValue = operate(valueOne, valueTwo, op);
                     cout << valueOne << " " << op << " " << valueTwo << " = " << operatedValue << endl;
     				operands.push(operatedValue);
@@ -353,7 +356,7 @@ public:
 				}
 			}
 		}
-    //4 * 5 + 6 ^ 3 
+		
 		finalAnswer = operands.top();
 
 		while (!operators.empty())
@@ -383,46 +386,64 @@ public:
 	}
 };
 
+void printOpening() {
+    cout << "WELCOME TO GROUP 1 CALCULATOR!~" << endl << endl;
+    cout << "Here is little input example to use this calculator" << endl;
+    cout << "--Example of trigonometry-- " << endl;
+    cout << "~ 30s means sin(30)" << endl;
+    cout << "~ 60c means cos(60)" << endl;
+    cout << "~ 90t means tan(90)" << endl << endl;
+    
+    cout << "--Example of sqrt, log, ln-- " << endl;
+    cout << "~ 4x means sqrt(4)" << endl;
+    cout << "~ 20y means log(40)" << endl;
+    cout << "~ 8z means ln(8)" << endl << endl;
+    
+    cout << "Enter 0 to exit the program" << endl;
+    cout << "Enter H to view history" << endl;
+    cout << "Enter D to delete latest history" << endl;
+    cout << "Enter E to Erase all history" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+}
+
 int main()
 {
 	
     history hh;
     string userInput, sentinel = "0";
-    cout << "Enter 0 to exit the program"<<endl;
-    cout<<"Enter H to view history"<<endl;
-    cout<<"Enter D to delete latest history"<<endl;
-    cout<<"Enter E to erase history"<<endl;
-    cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+
+    printOpening();
+    
     char usIn;
     
     while (userInput != sentinel)	{
     	cout << "Enter an expression: ";
     	getline(cin, userInput);
     	usIn = toupper(userInput[0]);
-    	
     	if (userInput == "0")
     		break;
-    		
-    	else if(usIn =='H'){
+    	else if(usIn =='H')
+    	{
     		hh.showhis();
             continue;
     	}
-    	
-    	else if(usIn =='E'){
+    	else if(usIn =='E')
+    	{
     		hh.clearhis();
     		continue;
     	}
-    	
-    	else if(usIn =='D'){
+    	else if(usIn =='D')
+    	{
     		hh.delone();
     		continue;
     	}
-    	
+    
     	Calculator userExpression(userInput);
     	if (userExpression.isLegal(userInput) == false)
     		continue;
-    	else {
-            double finalValue = userExpression.eval();
+    	else
+    	{
+             double finalValue = userExpression.eval();
     		cout << "\nResult: " <<  finalValue << "\n\n";
     		hh.addtohis(userInput, finalValue);
     	}
