@@ -175,7 +175,7 @@ public:
 
 	bool isOperator(char op)
 	{
-		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^'){
+		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^' || op  == 's' || op == 'c' || op == 't'){
       return true;
     }
 		else{
@@ -298,6 +298,13 @@ public:
 				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
+					if (operators.top() == 's' || operators.top() == 'c' || infix[i] == 't')
+					{
+					char sign = infix[i];
+				    	double val = infix[i+1];
+				    	double trig = trigonometry(sign, val);
+				    	operands.push(trig);
+					}
 				}
 				else
 				{
@@ -349,7 +356,7 @@ string userInput, sentinel = "0";
 cout << "Enter 0 to exit the program"<<endl;
 cout<<"Enter H to view history"<<endl;
 cout<<"Enter D to delete latest history"<<endl;
-cout<<"Enter C to clear history"<<endl;
+cout<<"Enter E to Erase all history"<<endl;
 cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
 char usIn;
 
@@ -364,7 +371,7 @@ while (userInput != sentinel)	{
 		hh.showhis();
         continue;
 	}
-	else if(usIn =='C')
+	else if(usIn =='E')
 	{
 		hh.clearhis();
 		continue;
