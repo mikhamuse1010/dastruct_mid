@@ -167,7 +167,7 @@ public:
 
 	bool isOperand(char number)
 	{
-		if (number >= '0' && number <= '9')
+		if ((number >= '0' && number <= '9')||number=='p')
 			return true;
 		else
 			return false;
@@ -249,27 +249,42 @@ public:
 				double currentNumber = 0;
 				while (i < infix.length() && ( isOperand(infix[i]) || infix[i] == '.'))
 				{
-          if (infix[i] == '.'){
-            int counter = 0;
-            int dec = 0;
-            i++; 
-            for(; i < infix.length(); i++){
-              if (isOperand(infix[i])){
-                dec = 10 * dec + (int)(infix[i] - '0');
-                counter++;
-              }
-              else break;
-            }
-            double calculatedDec= (double)dec / (double)(pow(10, counter));
-            // cout << currentNumber << endl;
-            // cout << fixed << setprecision(5) << calculatedDec << endl;
-            currentNumber += calculatedDec;
-            
-          }
-          else {
-					  currentNumber = 10 * currentNumber + (double)(infix[i] - '0');
-					  ++i;
-          }
+          			if (infix[i] == '.')
+					{
+            			int counter = 0;
+            			int dec = 0;
+            			i++; 
+            			for(; i < infix.length(); i++)
+						{
+              				if (isOperand(infix[i]))
+							{
+                				dec = 10 * dec + (int)(infix[i] - '0');
+                				counter++;
+              				}
+              				else break;
+            			}
+            			double calculatedDec= (double)dec / (double)(pow(10, counter));
+            			// cout << currentNumber << endl;
+            			// cout << fixed << setprecision(5) << calculatedDec << endl;
+            			currentNumber += calculatedDec;
+	
+      	    		}
+        	  		else 
+					{
+						if (infix[i]!='p')
+						{
+							currentNumber = 10 * currentNumber + (double)(infix[i] - '0');
+						}
+						if (infix[i]=='p'&&currentNumber==0) 
+						{
+							currentNumber=M_PI;
+						}
+						else if (infix[i]=='p'&&currentNumber!=0) 
+						{
+							currentNumber=currentNumber*M_PI;
+						}
+						++i;
+          			}
 				}
 				operands.push(currentNumber);
 				--i;
@@ -381,13 +396,13 @@ while (userInput != sentinel)	{
 		hh.delone();
 		continue;
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
   // cout << userInput << endl;
-=======
->>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
-=======
->>>>>>> 9f84b51da46a29c9010d0227983bd60a48e1eacf
+//=======
+//>>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
+//=======
+//>>>>>>> 9f84b51da46a29c9010d0227983bd60a48e1eacf
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
 		continue;
