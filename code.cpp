@@ -190,6 +190,22 @@ public:
 		else
 			return false;
 	}
+	
+	bool isTrigonometry(char character) 
+	{
+	    if (character == 's' || character == 'c' || character == 't')
+	        return true;
+	    else 
+	        return false;
+	}
+	
+	bool isExtended(char character)
+	{
+	    if(character == 'x' || character == 'y' || character == 'z')
+	        return true;
+        else
+            return false;
+	}
 
 	int precedence(char character)
 	{
@@ -197,7 +213,7 @@ public:
 			return 4;
 		else if (character == '*' || character == '/')
 			return 3;
-		else if (character == 's' || character == 'c' || character == 't')
+		else if (character == 's' || character == 'c' || character == 't' || character == 'x' || character == 'y' || character == 'z')
 			return 2;
 		else if (character == '+' || character == '-')
 			return 1;
@@ -223,20 +239,26 @@ public:
 	
 	double trigonometry(char character, double value) 
 	{
+       		double sinus = sin(value);
+	    double cosin = cos(value);
+	    double tangent = tan(value);
 		switch(character) {
-			case 's': return (sin(value)); break;
-      case 'c': return (cos(value)); break;
-      case 't': return (tan(value)); break;
+    	    case 's': return sinus; break;
+            case 'c': return cosin; break;
+            case 't': return tangent; break;
 		}
 	}
 	
-	double trigonometry(char character, int value) 
+	double extended(char character, double value) 
 	{
-		switch(character) {
-			case 's': return (sin(value)); break;
-            		case 'c': return (cos(value)); break;
-            		case 't': return (tan(value)); break;
-		}
+	    double x = sqrt(value);
+	    double y = log10(value);
+	    double z = log(value);
+	    switch(character) {
+	        case 'x': return x; break;
+	        case 'y': return y; break;
+	        case 'z': return z; break;
+	    }
 	}
 
 	double eval()
@@ -288,6 +310,26 @@ public:
 				}
 				operands.push(currentNumber);
 				--i;
+			}
+			
+			else if(isTrigonometry(infix[i])) {
+			    if (infix[i] == 's' || infix[i] == 'c' || infix[i] == 't') {
+			        operators.push(infix[i]);
+			    }
+				char opTrig = operators.pop();
+				double angka = operands.pop();
+				double hasilTrig = trigonometry(opTrig, angka);
+				operands.push(hasilTrig);
+			}
+			
+			else if(isExtended(infix[i])) {
+			    if(infix[i] == 'x' || infix[i] == 'y' || infix[i] == 'z') {
+			        operators.push(infix[i]);
+			    }
+			    char opEx = operators.pop();
+			    double angka = operands.pop();
+			    double hasilEx = extended(opEx, angka);
+			    operands.push(hasilEx);
 			}
 
 			else if (infix[i] == '(')
