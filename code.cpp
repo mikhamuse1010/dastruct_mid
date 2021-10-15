@@ -357,31 +357,27 @@ while (userInput != sentinel)	{
 	getline(cin, userInput);
 	if (userInput == "0")
 		break;
-	else if(userInput=="H")
+	else if(userInput[0] = toupper(userInput[0])=='H')
 	{
 		hh.showhis();
         continue;
 	}
-	else if(userInput=="C")
+	else if(userInput[0] = toupper(userInput[0])=='C')
 	{
 		hh.clearhis();
 		continue;
 	}
-	else if(userInput=="D")
+	else if(userInput[0] = toupper(userInput[0])=='D')
 	{
 		hh.delone();
 		continue;
 	}
-<<<<<<< HEAD
-  cout << userInput << endl;
-=======
->>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
 		continue;
 	else
 	{
-    double finalValue = userExpression.eval();
+         double finalValue = userExpression.eval();
 		cout << "\nResult: " <<  finalValue << "\n\n";
 		hh.addtohis(userInput, finalValue);
 	}
