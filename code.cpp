@@ -298,8 +298,13 @@ public:
 			        operators.push(infix[i]);
 			    }
 				char opTrig = operators.pop();
-				double angka = operands.pop();
-				double hasilTrig = trigonometry(opTrig, angka);
+				double val = 0;
+					while ( isOperand(infix[i + 1]) == true)
+					  	        {
+					  	            val =  10 * val + (double)(infix[i + 1] - '0');
+					  	            i++;
+					  	        }
+				double hasilTrig = trigonometry(opTrig, val);
 				operands.push(hasilTrig);
 			}
 			
@@ -308,7 +313,12 @@ public:
 			        operators.push(infix[i]);
 			    }
 			    char opEx = operators.pop();
-			    double angka = operands.pop();
+			    double angka = 0;
+				 while ( isOperand(infix[i + 1]) == true)
+					{
+					  angka =  10 * angka + (double)(infix[i + 1] - '0');
+					  i++;
+				 	}
 			    double hasilEx = extended(opEx, angka);
 			    operands.push(hasilEx);
 			}
@@ -336,14 +346,6 @@ public:
 				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
-					if (operators.top() == 's' || operators.top() == 'c' || infix[i] == 't')
-					{
-					char sign = infix[i];
-				    	double val = infix[i+1];
-				    	double trig = trigonometry(sign, val);
-				    	operands.push(trig);
-					}
-				}
 				else
 				{
     			    double valueTwo = operands.pop();
