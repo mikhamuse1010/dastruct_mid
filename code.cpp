@@ -393,14 +393,14 @@ void printOpening() {
     cout << "WELCOME TO GROUP 1 CALCULATOR!~" << endl << endl;
     cout << "Here is little input example to use this calculator" << endl;
     cout << "--Example of trigonometry-- " << endl;
-    cout << "~ 30s means sin(30)" << endl;
-    cout << "~ 60c means cos(60)" << endl;
-    cout << "~ 90t means tan(90)" << endl << endl;
+    cout << "~ s30 means sin(30)" << endl;
+    cout << "~ c60 means cos(60)" << endl;
+    cout << "~ t90 means tan(90)" << endl << endl;
     
     cout << "--Example of sqrt, log, ln-- " << endl;
-    cout << "~ 4x means sqrt(4)" << endl;
-    cout << "~ 20y means log(20)" << endl;
-    cout << "~ 8z means ln(8)" << endl << endl;
+    cout << "~ x4 means sqrt(4)" << endl;
+    cout << "~ y20 means log(20)" << endl;
+    cout << "~ z8 means ln(8)" << endl << endl;
     
     cout << "Enter 0 to exit the program" << endl;
     cout << "Enter H to view history" << endl;
