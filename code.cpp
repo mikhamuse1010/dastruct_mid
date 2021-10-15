@@ -301,16 +301,20 @@ public:
 				double val = 0;
 					while ( isOperand(infix[i + 1]) == true)
 					  	        {
-					  	            if (infix[i+1] != 'p')
+					  	            if (infix[i+1] =='p' && val == 0)
 					  	            {
-					  	            val =  10 * val + (double)(infix[i + 1] - '0');
+					  	            val = M_PI;
 					  	            }
-					  	            i++;
 					  	            if (infix[i+1]=='p'&& val !=0) 
 						                {
 							                val=val*M_PI;
-						                }   
-					  	            }
+						                }
+						            else
+						            {
+						                val =  10 * val + (double)(infix[i + 1] - '0');
+						            }
+						            i++;
+					  	        }
 				double hasilTrig = trigonometry(opTrig, val);
 				operands.push(hasilTrig);
 			}
@@ -321,18 +325,22 @@ public:
 			    }
 			    char opEx = operators.pop();
 			    double angka = 0;
-				 while ( isOperand(infix[i + 1]) == true)
-					{
-					 if (infix[i+1] != 'p')
-					     {
-					  	angka =  10 * angka + (double)(infix[i + 1] - '0');
-					  	i++;
-					     }
-					  if (infix[i+1]=='p'&& angka !=0) 
+				while ( isOperand(infix[i + 1]) == true)
+					  	        {
+					  	            if (infix[i+1] =='p' && angka == 0)
+					  	            {
+					  	            angka = M_PI;
+					  	            }
+					  	            if (infix[i+1]=='p'&& angka !=0) 
 						                {
 							                angka = angka*M_PI;
-						                }   
-					  	            }
+						                }
+						            else
+						            {
+						                angka =  10 * angka + (double)(infix[i + 1] - '0');
+						            }
+						            i++;
+					  	        }
 			    double hasilEx = extended(opEx, angka);
 			    operands.push(hasilEx);
 			}
