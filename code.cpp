@@ -20,7 +20,7 @@ class history
 		{
 			if(histo.empty())
 			{
-				cout<<"history is empty"<<endl;
+				cout<<"history is empty"<<endl ;
 			}
 			while(!histo.empty())
 			{
@@ -33,6 +33,7 @@ class history
 				histo.push(temp.front());
 				temp.pop();
 			}
+			cout << endl;
 			return;
 		}
 		void clearhis()
@@ -41,12 +42,12 @@ class history
 			{
 				histo.pop();
 			}
-			cout<<"History has been cleared!!"<<endl;
+			cout<<"History has been cleared!!"<<endl << endl;
 			return;
 		}
 		void delone()
 		{
-			cout<<histo.front()<<" has been deleted!!"<<endl;
+			cout<<histo.front()<<" has been deleted!!"<<endl << endl;
 			histo.pop();
 			return;
 		}
@@ -67,9 +68,7 @@ public:
 
 	void push(DataType element, bool output = false)
 	{
-    // if (output){
-      cout << "element being pushed: " <<element << endl;
-    // }
+    //   cout << "element being pushed: " <<element << endl;
 		struct Node* newNode;
 		newNode = new Node();
 		newNode->data = element;
@@ -79,12 +78,9 @@ public:
   void loop(){
     struct Node* temp;
     temp = head;
-    // cout << "looping: ";
     while (temp != NULL){
-      // cout << temp->data << ' ';
       temp = temp->next;
     }
-    // cout << endl;
   }
 	DataType pop()
 	{
@@ -350,27 +346,27 @@ public:
 				}
 				else
 				{
-					double valueTwo = operands.pop();
-					double valueOne = operands.pop();
+    			    double valueTwo = operands.pop();
+    				double valueOne = operands.pop();
 					char op = operators.pop();
-          double operatedValue = operate(valueOne, valueTwo, op);
-          cout << valueOne << " " << op << " " << valueTwo << " = " << operatedValue << endl;
-					operands.push(operatedValue);
-					operators.push(infix[i]);
+                    double operatedValue = operate(valueOne, valueTwo, op);
+                    cout << valueOne << " " << op << " " << valueTwo << " = " << operatedValue << endl;
+    				operands.push(operatedValue);
+    				operators.push(infix[i]);
 				}
 			}
 		}
-    //4 * 5 + 6 ^ 3 
+		
 		finalAnswer = operands.top();
 
 		while (!operators.empty())
 		{
-      operands.loop();
+            operands.loop();
 			double valueTwo = operands.pop();
 			double valueOne = operands.pop();
 			char op = operators.pop();
 
-      double operateValue = operate(valueOne, valueTwo, op);
+            double operateValue = operate(valueOne, valueTwo, op);
 
 			operands.push(operateValue, true);
 			finalAnswer = operateValue;
@@ -390,56 +386,68 @@ public:
 	}
 };
 
+void printOpening() {
+    cout << "WELCOME TO GROUP 1 CALCULATOR!~" << endl << endl;
+    cout << "Here is little input example to use this calculator" << endl;
+    cout << "--Example of trigonometry-- " << endl;
+    cout << "~ 30s means sin(30)" << endl;
+    cout << "~ 60c means cos(60)" << endl;
+    cout << "~ 90t means tan(90)" << endl << endl;
+    
+    cout << "--Example of sqrt, log, ln-- " << endl;
+    cout << "~ 4x means sqrt(4)" << endl;
+    cout << "~ 20y means log(40)" << endl;
+    cout << "~ 8z means ln(8)" << endl << endl;
+    
+    cout << "Enter 0 to exit the program" << endl;
+    cout << "Enter H to view history" << endl;
+    cout << "Enter D to delete latest history" << endl;
+    cout << "Enter E to Erase all history" << endl;
+    cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
+}
+
 int main()
 {
 	
-history hh;
-string userInput, sentinel = "0";
-cout << "Enter 0 to exit the program"<<endl;
-cout<<"Enter H to view history"<<endl;
-cout<<"Enter D to delete latest history"<<endl;
-cout<<"Enter E to Erase all history"<<endl;
-cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
-char usIn;
+    history hh;
+    string userInput, sentinel = "0";
 
-while (userInput != sentinel)	{
-	cout << "Enter an expression: ";
-	getline(cin, userInput);
-	usIn = toupper(userInput[0]);
-	if (userInput == "0")
-		break;
-	else if(usIn =='H')
-	{
-		hh.showhis();
-        continue;
-	}
-	else if(usIn =='E')
-	{
-		hh.clearhis();
-		continue;
-	}
-	else if(usIn =='D')
-	{
-		hh.delone();
-		continue;
-	}
-//<<<<<<< HEAD
-//<<<<<<< HEAD
-  // cout << userInput << endl;
-//=======
-//>>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
-//=======
-//>>>>>>> 9f84b51da46a29c9010d0227983bd60a48e1eacf
-	Calculator userExpression(userInput);
-	if (userExpression.isLegal(userInput) == false)
-		continue;
-	else
-	{
-         double finalValue = userExpression.eval();
-		cout << "\nResult: " <<  finalValue << "\n\n";
-		hh.addtohis(userInput, finalValue);
-	}
-}
+    printOpening();
+    
+    char usIn;
+    
+    while (userInput != sentinel)	{
+    	cout << "Enter an expression: ";
+    	getline(cin, userInput);
+    	usIn = toupper(userInput[0]);
+    	if (userInput == "0")
+    		break;
+    	else if(usIn =='H')
+    	{
+    		hh.showhis();
+            continue;
+    	}
+    	else if(usIn =='E')
+    	{
+    		hh.clearhis();
+    		continue;
+    	}
+    	else if(usIn =='D')
+    	{
+    		hh.delone();
+    		continue;
+    	}
+    
+    	Calculator userExpression(userInput);
+    	if (userExpression.isLegal(userInput) == false)
+    		continue;
+    	else
+    	{
+             double finalValue = userExpression.eval();
+    		cout << "\nResult: " <<  finalValue << "\n\n";
+    		hh.addtohis(userInput, finalValue);
+    	}
+    }
 
 	system("pause");
 
