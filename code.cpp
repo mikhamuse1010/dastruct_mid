@@ -351,23 +351,25 @@ cout<<"Enter H to view history"<<endl;
 cout<<"Enter D to delete latest history"<<endl;
 cout<<"Enter C to clear history"<<endl;
 cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+char usIn;
 
 while (userInput != sentinel)	{
 	cout << "Enter an expression: ";
 	getline(cin, userInput);
+	usIn = toupper(userInput[0]);
 	if (userInput == "0")
 		break;
-	else if(userInput[0] = toupper(userInput[0])=='H')
+	else if(usIn =='H')
 	{
 		hh.showhis();
         continue;
 	}
-	else if(userInput[0] = toupper(userInput[0])=='C')
+	else if(usIn =='C')
 	{
 		hh.clearhis();
 		continue;
 	}
-	else if(userInput[0] = toupper(userInput[0])=='D')
+	else if(usIn =='D')
 	{
 		hh.delone();
 		continue;
