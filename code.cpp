@@ -175,7 +175,7 @@ public:
 
 	bool isOperator(char op)
 	{
-		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^'){
+		if (op == '+' || op == '-' || op == '*' || op == '/' || op == '(' || op == ')' ||op == '[' || op == ']' || op == '{' || op == '}' || op == '^' || op  == 's' || op == 'c' || op == 't'){
       return true;
     }
 		else{
@@ -298,6 +298,13 @@ public:
 				if (operators.empty() == true || precedence(infix[i]) > precedence(operators.top()))
 				{
 					operators.push(infix[i]);
+					if (operators.top() == 's' || operators.top() == 'c' || infix[i] == 't')
+					{
+					char sign = infix[i];
+				    	double val = infix[i+1];
+				    	double trig = trigonometry(sign, val);
+				    	operands.push(trig);
+					}
 				}
 				else
 				{
@@ -349,39 +356,44 @@ string userInput, sentinel = "0";
 cout << "Enter 0 to exit the program"<<endl;
 cout<<"Enter H to view history"<<endl;
 cout<<"Enter D to delete latest history"<<endl;
-cout<<"Enter C to clear history"<<endl;
+cout<<"Enter E to Erase all history"<<endl;
 cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"<<endl;
+char usIn;
 
 while (userInput != sentinel)	{
 	cout << "Enter an expression: ";
 	getline(cin, userInput);
+	usIn = toupper(userInput[0]);
 	if (userInput == "0")
 		break;
-	else if(userInput=="H")
+	else if(usIn =='H')
 	{
 		hh.showhis();
         continue;
 	}
-	else if(userInput=="C")
+	else if(usIn =='E')
 	{
 		hh.clearhis();
 		continue;
 	}
-	else if(userInput=="D")
+	else if(usIn =='D')
 	{
 		hh.delone();
 		continue;
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
   // cout << userInput << endl;
 =======
 >>>>>>> 3af5daea99f6709c85db70716511865a96be9c87
+=======
+>>>>>>> 9f84b51da46a29c9010d0227983bd60a48e1eacf
 	Calculator userExpression(userInput);
 	if (userExpression.isLegal(userInput) == false)
 		continue;
 	else
 	{
-    double finalValue = userExpression.eval();
+         double finalValue = userExpression.eval();
 		cout << "\nResult: " <<  finalValue << "\n\n";
 		hh.addtohis(userInput, finalValue);
 	}
