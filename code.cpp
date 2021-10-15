@@ -147,21 +147,6 @@ public:
 		{
 			cout<<"Error: Unmatched Parenthesis (Brackets)"<<endl<<endl;;
 		}
-		// try 
-		// {
-		// 	for (size_t i = 0; i < infix.length(); i++)
-		// 	{
-		// 		switch (infix[i])
-		// 		{
-		// 		case '.': legal = false; throw 1; break;
-		// 		default: break;
-		// 		}
-		// 	}
-		// }
-		// catch (...)
-		// {
-		// 	cout << "Error: Operands must be integers!"<<endl<<endl;
-		// }
 		return legal;
 	}
 
