@@ -301,8 +301,16 @@ public:
 				double val = 0;
 					while ( isOperand(infix[i + 1]) == true)
 					  	        {
+					  	            if (infix[i+1] != 'p')
+					  	            {
 					  	            val =  10 * val + (double)(infix[i + 1] - '0');
+					  	            }
 					  	            i++;
+					  	            if (infix[i+1]=='p'&& val !=0) 
+						                {
+							                val=val*M_PI;
+						                }   
+					  	            }
 					  	        }
 				double hasilTrig = trigonometry(opTrig, val);
 				operands.push(hasilTrig);
@@ -318,6 +326,11 @@ public:
 					{
 					  angka =  10 * angka + (double)(infix[i + 1] - '0');
 					  i++;
+					  if (infix[i+1]=='p'&& angka !=0) 
+						                {
+							                angka = angka*M_PI;
+						                }   
+					  	            }
 				 	}
 			    double hasilEx = extended(opEx, angka);
 			    operands.push(hasilEx);
